@@ -1,0 +1,146 @@
+\documentclass{article}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\newcommand{\sectionbreak}{\clearpage}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=text-text}
+\setsansfont{Verdana}
+\renewcommand*{\familydefault}{\sfdefault}
+
+
+\usepackage{lingmacros}
+\usepackage[document]{ragged2e}
+\usepackage{booktabs} 
+
+
+\begin{document}
+\section*{Jan Šindler}
+\subsection*{písmo pro digitální zobrazování, technologie TT hintingu}
+Tvorba písma a typografie, bakalářská práce, 2019\\
+
+
+
+\section{Co je to hinting?}
+
+Petr Bilak \* vic definici \* Hinting, or screen optimising, is the process by which TrueType or PostScript fonts are adjusted for maximum readability on computer monitors.
+
+
+
+\subsection{Hinting dnes}
+
+je umírajícím řemeslem, pro většinu případů stačí auto-hinting, v dalších případech o tento aspekt fontu designér nejeví zájem protože pracuje na zařízení s vysokým rozlišením. To se projeví až u koncového uživatele. Nutno přiznat, že hinting není tak potřeba jak dříve pro užití na stolních počítačích. Dokonce i já jako středoevropan s poměrně výkonným počítačem si všímám nekvalitně udělaných písem na webu, ty pak často velmi znepříjemňují čtení na digitálních zařízení. 
+
+
+\subsection{Druhy Hintingu}
+
+\begin{enumerate}
+\item \textbf{TrueTypový hinting}
+je velmi silný nástroj, který umožňuje modifikace písmen každé velikosti a nejmenších detailů, jako posunutí bodu pro určitou písmovou velikost klidně i o 1/16 pixelu. Nástroj je to silný a jeho ovládání je velmi komplexní. TT hinting jak ho známe dnes si můžeme představit jako vizuální programování, kde nastavujeme pravidla. Je nutno si uvědomit, že je to programovací jazyk a každý znak má program v takovémto jazyku k sobě přiřazen.
+
+\item \textbf{PostScriptový hinting}
+Postcriptový hinting je modernější forma hintingu, je jednodušší než TrueTypový ale neumožňuje takové modifikace.
+
+\item \textbf{Autohinting}
+Autohinting je automatické vytvoření hintingového programu pro písmo. TrueTypový může fungovat buď na základě postscriptového hintingu, bude fungovat přesněji než kdyby se algoritmus pokoušel o automatizaci hintingu bez něj. TT autohinting může narazit v případě kdy jde o nestandartní písmo, například když konce tahů nekončí přímo na dotažnicích. Autohinting taky nemůžeme aplikovat na písma, kde je důležité vědomí o souvislostech v písmu. To jsem už sám pocítil při práci na variabilním písmu, kde jsem mohl hintovat pouze v ose Y. To by nebyl takovým problém sám o sobě, písmo působí efektem 3D rotace a při pohledu z 90 stupňů se začnou překrývat a kontura se začne zaokrouhlovat na rozdílné strany, to vytváří na kontuře nepříjemné schody. V normálni situaci by tohle hinting vyřešil, jelikož ale chceme plynulou animaci tak v ose X žádný hinting aplikovaný být nemůže, kontura se vymění za obdelník stejných rozměnu přesně při devadesáti stupních, při pohledu ze strany tedy na kontuře nevznikají žádné schody. Aby přechod mezi znaky a obdelníky byl plynulý, musí i tyto obdelníky být vyhinitované stejně jako znaky, které zastupují. Stroj tyto souvislosti neví a tak bylo potřeba toto písmo vyhintovat ručně.
+\end{enumerate}
+
+\section{programy okolo hintingu}
+neco napsat o programech obecne
+
+\subsection{VTT}
+Link - základní nástroj pro, kterým určujete jaký vztah jeden kotevní bod naplňuje k druhému. Může jít o jednoduchý pohyb - pohne-li se jeden, pohne se i druhý a nebo že tyto dva body budou od sebe vzdáleny stejný počet pixelů jako druhé dva body.
+Delta – posouvání buď globálních a nebo lokálních hodnot - nastavíme li že všechny body na x-výšce jsou označeny číslem 6, nástrojem delta můžeme určit v jakých velikostech se případně výška o bod zvedne, nejsme-li spokojeni s plynulostí gradace velikostí. Lokální deltou pak ovládáme body stejným způsobem a to od nejjemnější nuance 1/8 bodu až po 8 bodů do plusu i záporu, pokud by to mělo nějaký důvod, můžeme nastavit, že písmeno 'o' je širší nebo užší až o 8 bodů ve zvolené velikosti.
+Interpolate - interpoluje jeden bod na základě dalších dvou – něco jako když na pružinu umístíme bod a pak s jí natahujem, bod bude vždy ve stejném vzdálenostním poměru ke krajům pružiny.
+
+\subsection{rasterizéry}
+\begin{enumerate}
+\item ClearType - rasterizer Windowsu, funguje na bázi rozdělení pixelu na sub-pixely. RGB = 1 pixel, R = 0.33 pixelu
+
+\item FreeType - opensourcový projekt, který najdeme ve velkém množství zařízení. Od Androidu/Linuxu až po telefony společnosti Apple. Jde o opensourcovou variantu ClearTypu
+
+\item Quartz - rasterizer MacOs, ten ignoruje veškteré hintingové instrukce a rastr vytvoří podle vlastního algoritmu, tak aby text vypadal na obrazovce co nejvíce jako jeho tištěná podoba. To má za důsledek, že písma jsou velmi špatně čitelná v malých velikostech.
+
+\item CoolType - je metoda rastrování textu, kterou využívá Adobe a jejich řada programů
+\end{enumerate}
+
+\section{analýzy}
+uvod
+\subsection{font-size}
+Obrazovky se dnešních počítačů v Evropě a dalších rozvinutých zemích problémy se zobrazováním písma skoro nemají, nesmíme ovšem opomíjet země, kam naše technologie ještě nedorazila a navrhovat písmo i pro ně. Velké firmy by měly mít písmo, které obstojí v jakékoliv situaci a to i na tom nejslabším zařízení. Typickým příkladem může být displej pračky, digitální cenovka v supermarketu a nebo jednoduchý počítačový systém, který nepodporuje nejmodernější zobrazovací technologie, příkladem může být platební terminál. Všechny tyto zařízení vyžadují buď aplikace firemních písem, log a nebo piktogramů. Zde všude může hinting velmi pomoci. Písmo jsem navrhoval primárně pro nějakou velikost, která je lidmi nejpoužívanější, svůj požadavek jsem zadal pouze na webové nastavení, hlavně protože je ustálené a programátoři velikost vybírají s vědomím, že neví na jakém zařízení se jejich web zobrazí. Jelikož jde o akademický úkol, tak ani já nevím na jakém zařízení bude moje písmo zobrazováno. O to zajímavější to je, neboť mi jde o to aby vypadalo, četlo se a fungovalo dobře na všech zařízeních. Pro mojí analýzu jsem využil služby BigQuery od Googlu, která dovoluje zkoumat velká množství dat pomocí jejich počítačů. Data jsou buď externí a nebo přímo od Googlu, takový soubor dat se nazývá dataset. GitHub je platforma pro vývojáře, kde si lidé mohou ukládat a sdílet právě vyvíjenou aplikaci buď mezi sebou a nebo mezi veřejnost. Jeden z datasetů githubu má 2,3TB, já jsem svůj pokus dělal pouze na neplacené části 30GB a i tak jsem dostal velké množství dat, kterou jsou svojí kvantitou dostačující. Programátoři využívají z velké části jednotky PX oproti PT, které jsou určené spíše pro tištěné výstupy. Z dat vyplynulo, že nejpoužívanější velikostí pro weby je 14PX a 10PT což se rovná 13.3PX. Základní velikostí pro navrhování písma určeného k digitálnímu zobrazování je tedy velikost 14PX. To je velikost, kde se právě začínají lámat rozdíly mezi hintingovými unibody písmy a písma se už začínají lišit. Mřížka B/W monitoru je omezena a proto mohou působit nějaká písma dost podobně i když jde původně buď o egyptienkové písmo a knižní serif. V případě malých velikostí ovšem nemůže jít o to se odlišit ale zaručit, že písmo bude fungovat i v malých velikostech. Nemluvě o přizpůsobení piktogramů a log k takovýmto zobrazení.
+
+\begin{tabular}{r|rrr}
+jednotka & \\
+& medián & \\
+& & m. průměr & \\
+& & & počet nálezů\\
+\midrule
+PX & 14.0 & 26.8330 &13352 \\
+PT & 10.0(13.3330PX)  & 12.3086 & 1231 \\
+EM & 1.2 & 3.0410 & 7225 \\
+\% & 100.0 & 114.9932 & 6295\\
+\end{tabular}
+
+\subsection{font-family}
+Mým dalším cílem zkoumání pomocí služby BigQuery bylo i jaké písma uživatelé používají. Vysledky ukazují, že převažují písma bezserifová a většinou systémová. Z toho vyplývá, že programátoři jsou si vědomi výhod takových písem. Systémová se nemusí zobrazovat a bezserifová jsou lépe čitelná na obrazovkách nižších rozlišení. Těmito dvaceti nejpoužívanějšími fonty je pouze jedno serifové, velmi překvapivé je, že Times New Roman se do téhle dvacítky vůbec nedostal. Zdali absence patkových písem je následkem slabé nabídky a nebo zkrátka nejsou určena pro digitální formu zobrazování je na diskusi. Fonty se pro weby nastavují buď konkrétně a nebo jako skupina, tedy název fontu – Arial – nebo druh fontu - Sans Serif. Font se nemusí nastavit jenom jeden v případě, že by font na cílové mašině nebyl, nahradil by se nekontrolovatelně na základní font platformy. To nechceme a proto můžeme v pořadí naších preferencí nastavit fonty dle libosti, pokud první v systému není, aplikuje se ten další atd. příklad font-family="Arial, Helvetica, Verdana".
+
+\begin{tabular}{r|rlr}
+název písma/skupiny & \\
+& počet nálezů & \\
+&& distribuce&\\
+\midrule
+sans-serif & 25895 &  Skupina\\
+Arial & 20070 & WIN\\
+Helvetica & 11886 & MAC\\
+Helvetica neue & 6560 & MAC\\
+Verdana & 5618 & WIN\\
+monospace & 4881 & Skupina\\
+Courier & 4315 & WIN\\
+Tahoma & 2953 & WIN\\
+inherit & 2943 & Skupina\\
+Lucida console & 2239 & WIN\\
+Font Awesome & 2163 & ID\\
+serif & 2146 & Skupina\\
+Lucida grande & 1733 & OS X\\
+Monaco & 1413 & OS X\\
+Lato & 1191 & G\\
+Open sans & 1135 & G\\
+Courier new & 1119 & WIN\\
+Consolas & 1099 & WIN\\
+Georgia &  1038 & WIN\&MAC\\
+Segoe ui & 819 & WIN\\
+\end{tabular}
+
+\section{Pixel a pixel mimo digitální svět}
+rastr vektoru - pixelizaci nesmíme striktně chápat jako něco co se vyskytuje výhradně na obrazovkách, jde o rozložení křivek na pravidelnou mřížku. O pravidelnou a ovladatelnou distribuci bodů křivky na tom rastru nám jde především když je velikost mřížky omezena. Uvádím zde tři příklady, kdy se taková distribuce hodí i pro aplikace jiné, než je obrazovka.\\
+A=Arial, G=Georgia, Ta=Tahomra, A=Arial, Ti=Times\\
+\begin{tabular}{r|cccccccccccc}
+\rotatebox[origin=l]{90}{počet shod}&
+\rotatebox[origin=l]{90}{shodné písmeno}&
+\rotatebox[origin=l]{90}{písmo a velikost}&\\
+\midrule
+5 & o & A 9 & o & G 9 & o & Ta 9 & o & Ti 9 & o & Ti 10\\
+4 & O & A 9 & O & Ti 9 & O & Ti 10 & 0 & Lu 11\\
+4 & 8 & A 9 & 8 & G 9 & 8 & Ta 9 & 8 & Ti 10\\
+3 & i & A 8 & l & A 8 & I & A 8\\
+3 & D & A 8 & D & Ta 8 & D & Co 10\\
+3 & e & A 9 & e & G 9 & e & Ta 9\\
+3 & t & A 9 & t & Ti 9 & t & Ti 10\\
+3 & j & G 9 & j & Ti 9 & j & Ti 10\\
+3 & l & G 9 & l & Ti 9 & l & Ti 10\\
+3 & u & G 9 & u & Ti 9 & u & Ti 10\\
+3 & 0 & Ta 9 & 0 & Ti 9 & 0 & Ti 10\\
+3 & e & G 10 & e & Ta 10 & e & Ti 11\\
+3 & 0 & G 10 & o & Ta 10 & o & Ti 11\\
+3 & o & G 11 & o & Ta 11 & o & Ti 12\\
+\end{tabular}
+
+\begin{enumerate}
+\item \textbf{Jehličkové tiskárny} s povinností tisknout všechny účtenky, roste i spotřeba thermopapíru, ten je ovšem nerecyklovatelný a na tento fakt často ochránci životního prostředí poukazují. Obchody, které jsou s touto problematikou obeznámeny používají staré jehličkové tiskárny, protože jde o tisk barvou na recyklovaný a dále recyklovatelný papír.Jde o jakýsi trend, který se šíří napříč bioobchody a kavárnami, řeší problém s nerecyklovatelnými thermopapíry a ukazuje nám, že žádná technologie není mrtvá a je velká šance, že se jednou či později opět vrátí. 
+\item \textbf{Produkce modních návrhů}
+jsou technologie, kdy při realizaci návrhu je míra detailu velmi omezena. Typicky může jít o pletení a tkaní.
+\item \textbf{Práce se samotným pixelem}
+obrázek není jenom sled obrázku a bodů ale přesná mřížka s přesnými údaji, to v dnešní době můžeme využít a můžeme pracovat se samotnými pixely. I trošku zruční designéři jsou už schopní si vyrobit vlastní rasterizer, který bude tvořit například vizuál pouhým festivalu aplikováním rasterizeru na fotografii. To nám skvěle předvedl například Just van Rossum a Hansje van Halem při vizuálech na vizuálních stylech festivalů Lowlands a nebo studio Norm při navrhování nové podoby švýcarských bankovek. Pokud mám pole typu šachovnice o veliksoti 2x2 pixelů, data obrázku by vypadala asi takto [[255, 0], [0, 255]]. S daty pak můžeme libovolně pracovat. Můžeme například všechna políčka, kde je bíla (255) spojit čárou a nebo je nahradit nějakým symbolem. Můžeme je nahradit třeba obličeji politiků, síť by pak byla asi v mnohem větší velikosti, než bychom očekávali od obrázku s rozlišením 2x2 pixelů. Z tohoto obrázku se nyní stává síť, kde každý bod může být pozorován samostatně. Dohromady však tvoří celek, kde rovnoměrná distribuce je důležitá.
+\end{enumerate}
+
+\end{document}
