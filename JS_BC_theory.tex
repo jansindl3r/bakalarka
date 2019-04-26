@@ -2,37 +2,46 @@
 \usepackage{titlesec}
 \usepackage{graphicx}
 \newcommand{\sectionbreak}{\clearpage}
+\renewcommand{\figurename}{Obr.}
 
-\usepackage{fontspec}
-\defaultfontfeatures{Mapping=text-text}
-\setsansfont{Verdana}
-\renewcommand*{\familydefault}{\sfdefault}
+\usepackage{times}
+
+\usepackage{hyperref}
 
 
 \usepackage{lingmacros}
 \usepackage[document]{ragged2e}
 \usepackage{booktabs} 
 
+\usepackage{graphicx, float} 
+\graphicspath{ {pics/} }
 
 \begin{document}
-\section*{Jan Šindler}
-\subsection*{písmo pro digitální zobrazování, technologie TT hintingu}
-Tvorba písma a typografie, bakalářská práce, 2019\\
+\section*{VYSOKÁ ŠKOLA\\UMĚLECKOPRŮMYSLOVÁ V PRAZE}
+Tvorba písma a typografie\\
+Bakalářská práce\\
+Jan Šindler\\
+\vspace{20mm}
+Písmo pro digitální zobrazování\\
+\vfill
+Praha, 2019\\
+Vedoucí bakalářské práce: Tomáš Brousil\\
+Konzultant bakalářské práce: xxxx\\
 
+\section{úvod}
+Téma jsem si vybral hlavně kvůli vlivu stáže ve firmě LucasFonts v létě 2018. Při stáži jsem se dozvěděl spoustu nového a zjistil jsem, že naše praxe není pouze o tvarování křivek. LucasFonts se věnují navrhování a produkci těch nejkvalitnějších fontu, které vydrží spoustu let. Rád jsem byl součástí týmu a doufám, že zase někdy budu. Poprvé když jsem od Lucase slyšel magická slova jako VTT a hinting, tak jsem mohl pouze předstírat, že vím o čem je řeč. První pokusy s hintingem proběhly už na stáži, šlo především o pokus-omyl metodu aplikování hintingu, moc jsem si z toho neodnesl. Po stáži jsem se začal věnovat oborům jako je programování a začal jsem se zajímat o strukturu fontového souboru. Hinting pořád neodmyslitelně patří k písmové produkci a je škoda, že o tomto řemeslu už moc lidí neví. Je důležité znát jeho sílu abychom mohli lépe navrhovat a uspokojit nejen svojí neukojitelnou autorskou touhu ale i koncového spotřebitele. O hintingu chci mít hlubší ponětí abych mohl dělat lepší písma, znát okolnosti a získat výhodu na trhu práce. Během studia jsem žil v naivní představě o nadvládě tvarosloví nad vším ostatními odvětvími navrhování písma, už to tak není a svou bakalářskou prací posouvám tvarosloví dané beziérovými křivkami ještě dále. Budu zpracovávat písmo, které bude vycházet z dat, které představuji dále v mé bakalářské práci. Zajímá mě hlavně vztah bitmapové rasterizované kontury a kontury samotné. Kdy se stane to, že naše milované písmo ztratí všechno co jsme mu dali a jeho z něho pár pixelů? Mohu navrhnout písmo, které bude vycházet z omezení mřížky, do které se navrhuje a nevypadalo jako z 90. let? Chci udělat písmo pro 1bitové displeje, protože právě pro tyto systémy vidím hinting jako obrovský potenciál. Chci navrhnout alternativu k písmu Verdana a Tahoma, která bude nabízet trošku jiný pohled na věc a bude stejně dobře zpracovaná. Samotná teoretická práce se zabývá analýzou situace ve světě digitálních písem, a přehledem nad tzv. big daty, které jsem sesbíral a analyzoval. Výsledky analýz jsou fakta, na kterých zakládám svůj projekt.
 
+\section{Co je to vlastně hinting?}
 
-\section{Co je to hinting?}
-
-Petr Bilak \* vic definici \* Hinting, or screen optimising, is the process by which TrueType or PostScript fonts are adjusted for maximum readability on computer monitors.
-
+Hinting je optimalizace TrueTypových a nebo PostScriptých fontů k docílení co největší čitelnosti a nebo naplnění jiného požadavku. Hint je v překladu nápověda, hinting je tedy jakési dávání rad rasterizéru, který je hloupý a bez rad by písmo dobře nezobrazil. 
 
 
 \subsection{Hinting dnes}
 
-je umírajícím řemeslem, pro většinu případů stačí auto-hinting, v dalších případech o tento aspekt fontu designér nejeví zájem protože pracuje na zařízení s vysokým rozlišením. To se projeví až u koncového uživatele. Nutno přiznat, že hinting není tak potřeba jak dříve pro užití na stolních počítačích. Dokonce i já jako středoevropan s poměrně výkonným počítačem si všímám nekvalitně udělaných písem na webu, ty pak často velmi znepříjemňují čtení na digitálních zařízení. 
+je umírajícím řemeslem, pro většinu případů stačí auto-hinting, v dalších případech o tento aspekt fontu designér nejeví zájem protože pracuje na zařízení s vysokým rozlišením. To se projeví až u koncového uživatele. Nutno přiznat, že hinting není tak potřeba jak dříve pro užití na stolních počítačích. Dokonce i já jako středoevropan s poměrně výkonným počítačem si všímám nekvalitně udělaných písem na webu, ty pak často velmi znepříjemňují čtení na digitálních zařízení. Jsou profese, u kterých lidé stráví několik hodin denně u počítače, na čitelnosti záleží a nemůže dojít k sebemenšímu omylu. Příkladem může být například opensourcové písmo Fira, které je velmi rozšířené mezi programátory.  Uživatelé si nesprávného hintingu všímají a i když často neví, jak tento problém pojmenovat tak ho nahlásí tvůrci písma aby jej \href{https://github.com/tonsky/FiraCode/issues?utf8=%E2%9C%93&q=hinting}{opravil}. Nesmíme si dělat iluze, že hinting nikoho nezajímá. Kde se vlastně vzala tahle nálada, když věnujeme takovou péči písmu pro tisk?
 
 
-\subsection{Druhy Hintingu}
+\subsection{Druhy Hintingu detailně}
 
 \begin{enumerate}
 \item \textbf{TrueTypový hinting}
@@ -123,8 +132,7 @@ jsou technologie, kdy při realizaci návrhu je míra detailu velmi omezena. Typ
 \end{enumerate}
 
 \subsection{\textit{O} u Timesu je stejné jako u Arialu}
-Unikátní tvar písmene, který jsme zvyklí posuzovat z papíru a jsme na něj tak pyšní se na obrazovkách promění a je z něho něco o čom jsme vůbec netoužili. V těch nejmenších velikostech naše výmysly zanikají, písmo je nečitelné a my jsme naštvaní. Hinting zaručí čitelnost i v těch nejmenších velikostech. Při mřížce, která může být vysoká vysoka i třeba jen 20 bodu zanikají ty nejmenší detaily a jedno písmo začíná připomínat to druhé. Jestli si někdo myslí, že tvorba písma o tom dělat písmena jinak, než ty před námi, tak se mýlí. Jestli jsou písma opravdu identická zkoumám v následujícím pokusu. Porovnávám bitmapy u písmen arial.ttf, georgia.ttf, tahoma.ttf, verdana.ttf, consola.ttf , lucon.ttf a times.ttf ve velikostech 8, 9, 10, 11 a 12 pixelů v jednobitovém režimu zobrazování.
-A=Arial, G=Georgia, Ta=Tahoma, Ti=Times, Lu=Lucida Console, Co=Consolas\\
+Unikátní tvar písmene, který jsme zvyklí posuzovat z papíru a jsme na něj tak pyšní se na obrazovkách promění a je z něho něco o čom jsme vůbec netoužili. V těch nejmenších velikostech naše výmysly zanikají, písmo je nečitelné a my jsme naštvaní. Hinting zaručí čitelnost i v těch nejmenších velikostech. Při mřížce, která může být vysoká vysoka i třeba jen 20 bodu zanikají ty nejmenší detaily a jedno písmo začíná připomínat to druhé. Jestli si někdo myslí, že tvorba písma o tom dělat písmena jinak, než ty před námi, tak se mýlí. Jestli jsou písma opravdu identická zkoumám v následujícím pokusu. Porovnávám bitmapy u písmen arial.ttf, georgia.ttf, tahoma.ttf, verdana.ttf, consola.ttf , lucon.ttf a times.ttf ve velikostech 8, 9, 10, 11 a 12 pixelů v jednobitovém režimu zobrazování.\\
 \begin{tabular}{r|cccccccccccc}
 \rotatebox[origin=l]{90}{počet shod}&
 \rotatebox[origin=l]{90}{shodné písmeno}&
@@ -145,17 +153,51 @@ A=Arial, G=Georgia, Ta=Tahoma, Ti=Times, Lu=Lucida Console, Co=Consolas\\
 3 & 0 & G 10 & o & Ta 10 & o & Ti 11\\
 3 & o & G 11 & o & Ta 11 & o & Ti 12\\
 \end{tabular}
+\vspace{20mm}\\
+A=Arial, G=Georgia, Ta=Tahoma, Ti=Times, Lu=Lucida Console, Co=Consolas\\
 
 \section{návrh písma Delta}
 Po všech těchto průzkumech a pochopení problematiky jsem teprve mohl začít navrhovat konturu. Potenciál pro využití této technologie vidím hlavně u velkých firem, kde není známo kde všude se jejich písmo může objevit. Chci nabídnout alternativu k písmu Verdana, která bude odrážet vizuální kulturu dnešní doby a bude stejně kvalitné přizpůsobena jednobitovým displejům. Při hledání písma pro takové displeje jsme velmi omezeni a pravděpodobně nejčastěji stejně skončíme u Verdany. To je klasické písmo a nemůže si dovolit být trochu expresivnější protože jde o celosvětový projekt. Proces mé tvorby popisuji chronologicky.
-\subsection{Mike Duggan}
+\subsection{Konzultace}
 Na fóru TypeDrawers jsem narazil na písmového inženýra – Mika Duggana, byl velmi ochotný se mnou konzultovat a vysvětlil mi nejzákladnější principy, které člověk aplikuje při hintování písma. Mike pracuje v Microsoftu a má za sebou hintování například písma Times New Roman.
 \subsection{Mřížka a kontura v ní}
-Při navrhování samotné kontury jsem chtěl vycházet z omezení daných tou nejpoužívanější mřížkou, tedy mřížkou při velikosti 14px. Omezení, která určuje by se měly promítnout do finální podoby kontury. Doufal jsem, že najdu tímto způsobem něco unikátního a písmo bude velmi připomínat to, které známe v tištěné podobě. Pro výšku x jsem vymezil 8 bodů, verzálky jsou o 2 body vyšší a spodní dotažnice o 2 body nižší, horní dotažnice je pak o jeden bod vyšší než verzálky. Rozdíl mezi výškou x a verzálkami o právě 2 body je důležitý pro primární velikost 14px hlavně kvůli identičnosti kontur napříč verzálkami a mínuskami v této velikosti.
-\subsection{kontura}
-Střed písmen prochází hned o bod výš nad matematickým středem písmena, písmu tak spolu s netradičně seřezanými diagonály dodává dynamiku. Diagonály písmen se snaží držet úhel 45 stupňů, horizontální-vertikální seřezávání diagonál usnadňuje práci s tímto úhlem a zároveň písma nepřesahují svojí optickou šířku. Kontura nepotřebuje striktně držet mřížku ze které vychází. Potencionální digitální užití písma může být v případě mé práce primární ale určitě ne jediné. Písmo tedy musí splňovat i kvality které vyžadují tištěná média.
-\subsection{prezentace a testování na displayích Nokia}
-Nokia display 5110 je dostatečně otevřený na to abych se do něj dostal a zároveň je zástupcem jednobitových displejů na které se zaměřuji a proto to byla jasná volba pro prezentaci a testování mého písma Delta. Jako počítač pro vykreslování písmen používám Raspberry Pi Zero WH, na kterém běží program napsaný v Pythonu 3, který jako rasterizér používá knihovnu FreeType, výsledek je tedy totožný s tím jak by se písmo chovalo na zařízení které je postaveno na Linuxu. 
+Při navrhování samotné kontury jsem chtěl vycházet z omezení daných tou nejpoužívanější mřížkou, tedy jak data ukazují, mřížkou o velikosti 14px. Právě velikosti okolo této by měly být ty nejpoužívanější. Omezení, která určuje by se měly promítnout do finální podoby kontury, aby originální kontura neztratila svou originalitu ve své bitmapové verzi. Skicoval jsem si do čtverečkovaného bloku a nebo kreslil rovnou v počítači v jednobitovém režimu. Doufal jsem, že najdu tímto způsobem něco unikátního a písmo v jednobitové aplikaci bude velmi připomínat to, které známe v tištěné podobě. Pro výšku x jsem vymezil 8 bodů, verzálky jsou o 2 body vyšší a spodní dotažnice o 2 body nižší, horní dotažnice je pak o jeden bod vyšší než verzálky. Rozdíl mezi výškou x a verzálkami o právě 2 body je důležitý pro primární velikost 14px hlavně kvůli identičnosti kontur napříč verzálkami a mínuskami v této velikosti. Rozlišení mřížky přenesl do mřížky fontu, tak že jeden čtverec mřížky má rozměry 44*40. Dřík má tedy tloušťku 44 bodu a horizontální tah 40. Písmo je navrhováno do několika kuželek, nejčastěji o šířce 4-6 bodů. Což vychází z faktu, že písmena v těchto kuželkách při 1bitovém zobrazování skončí, tak proč je tak nenavrhnout rovnou?
+\subsection{Bezpečné úhly}
+pro rovnoměrnou distribuci pixelů na diagonálách je velmi důležitý úhel ve kterém diagonály jsou. Úhel je úhlem diagonály obdelníku s poměrem stran 1:x. U 1:1 to je 45 stupňů, u 1:2 to je 26.5 atd. Tento tvar pak vyplňuje konturu, buď stoupa po jednom bodu doprava a nahoru a nebo o jeden doprava a dva nahoru.
+90,
+45,
+26.5 a 
+18.5 stupňů jsou nejpoužitelnější úhly pro obrazovku. V mém písmu se snažím všechny diagonály přizpůsobit těmto úhlům. Mezi 45 a 26.5 je poměrně velký rozdíl a když diagonála nespadá ani k jednomu z těchto úhlů, tak používám umělý bezpečný úhel, tzn. například úhel obdelníku 1:x.5. Ve velmi ojedinělých jsem byl přinucen bezpečný úhel vypustit. 
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/1bit.png}
+  \caption{vlevo tři diagonály pod úhlem 90, 26.5 a 18.5 stupňů, vpravo totéž ale vše o 10 stupňů zkoseno doprava. Jednobitové renderování}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/bw.png}
+  \caption{stejné diagonály. Jednobitové renderování, velikost 14px (Aplikované delty na levý tah)}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/truetype.png}
+  \caption{stejné diagonály, TrueType render}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/truetype_bw.png}
+  \caption{náhled intenzity svítivosti pixelů pří rendrování TrueType}
+\end{figure}
 
 
+\subsection{Kontura}
+Střed písmen prochází hned o bod výš nad matematickým středem písmena, písmu tak spolu s netradičně seřezanými diagonály dodává dynamiku, která jde proti staticky řešeným písmům navrhovaným pro digitální zobrazování. Důležitým faktorem pro písmena v 1bitovém režimu je rovnoměrná distribuce pixelů, ideálně pod úhlem 45 stupňů a nebo pod jiným z bezpečných úhlů. Diagonály písmen se snaží držet úhel 45 stupňů horizontální-vertikální seřezávání diagonál usnadňuje práci s tímto úhlem a zároveň písmena nepřesahují svojí optickou šířku. Takto řešené konce diagonál dodávají písmu svou osobitost a jiný pohled na věc. Kontura nepotřebuje striktně držet mřížku ze které vychází. Potencionální digitální užití písma může být v případě mé práce primární ale určitě ne jediné, je důležité tedy myslet na to, aby písmo bylo kvalitní a originální v každé aplikaci. Písmo tedy musí splňovat i kvality které vyžadují tištěná média a digitální užití.
+\subsection{Hinting}
+Udržení rovnoměrné distribuce pixelů je velmi náročné při 1bitovém renderování, můžeme sami porovnat obr. 2 \& 3. Osa X disponuje v případě TrueTypu třikrát větším rozlišením, což nejsme schopni lehce na zařízeních pozorovat. Je důležité si vzpomenou, že pixel může být jakkoliv veliký a pozorován z jakékoliv vzdálenosti jak v kontextu tak bez kontextu. Subpixelu na monitoru počítače si nevšimneme, všimneme si ale subpixelu na velike LED instalaci, ke které můžeme přistoupit z jakékoliv vzdálenosti? Estetika písma vychází z části z nástrojů, kterým disponuje hintovací program VTT. Nastavit zde úhel nejde přímo, se vzdálenosti se ovšem dá pracovat několika způsoby. Známe-li vzdálenost dvou stran trojúhelníku, můžeme nastavit úhel diagonály pomocí nich. Tenhle způsob je limitován pouze dvěma věcmi. 1. je přehlednost pracovního souboru, pro každou vzdálenost si musíme do šuplíku vzdálenosti uložit jednu proměnou. Jestli je takových proměnných spoustu, je pravděpodobné, že nad proměnnými ztratíme přehled. 2. výška trojúhelníku je omezena ještě neznámou proměnnou - výškou dotažnic. Pro vertikální pohyb je tedy zapotřebí volný prostor pro natahování vertikální strany trojúhelníku. Jednoduše řečeno - výška diagonály natažené od účaří k výšce x je dána výškou x, nemůžeme jí tedy nastavit absolutní hodnotou.
+\subsection{Prezentace a testování na displayích Nokia}
+Nokia display 5110 je dostatečně otevřený na to abych se do něj dostal a zároveň je zástupcem jednobitových displejů na které se zaměřuji a proto to byla jasná volba pro prezentaci a testování mého písma Delta. Jako počítač pro vykreslování písmen používám Raspberry Pi Zero WH, na kterém běží program napsaný v Pythonu 3, který jako rasterizér používá knihovnu FreeType, výsledek je tedy totožný s tím jak by se písmo chovalo na zařízení které je postaveno na Linuxu. Testovat písmo právě na tomto rasterizéru je dobrou myslím dobrou volbou hlavně proto, že je velká možnost, že koncové užití písma bude právě na zařízení s tímto rasterizérem.
+\subsection{Budoucnost mé bakalářské práce}
+Projekt bych budu sdílet na Githubu a začnu postupně přidávat podporu dalších jazyků. Zkušenosti, které jsem nabral na latince bych rád aplikoval i do jiných písmových systémů, kde technologie nemusí být tak vyvinuta a potřeba dalšího současného písma s hintingem je potřeba.
+
+\texcount 
 \end{document}
