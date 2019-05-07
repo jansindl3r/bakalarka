@@ -67,25 +67,39 @@ Téma jsem si vybral hlavně kvůli vlivu stáže ve firmě LucasFonts v létě 
 
 \section{Co je to vlastně hinting?}
 
-Hinting je optimalizace TrueTypových, nebo PostScriptých fontů k docílení co největší čitelnosti, nebo naplnění jiného požadavku, třeba aby se písmo vešlo do dané mřížky displeje. Hint je v překladu nápověda, hinting je tedy jakési dávání rad rasterizéru, který je hloupý a bez rad by písmo dobře nezobrazil. \\
-Jsou 3 základní druhy rastrování křivky (Beat Stamm, rastertragedy.com/RTRCh2.htm)
+Hinting, nebo optimalizace pro obrazovky, je proces při kterém jsou TrueType or PostScript fonty upraveny k maximální čitelnosti na displejích (Petr Biľak, typotheque.com/articles/hinting) Hint je v překladu nápověda, hinting je tedy jakési dávání rad rasterizéru, který je hloupý a bez rad by písmo dobře nezobrazil. Jsou 4 druhy rastrování křivky (Beat Stamm, rastertragedy.com/RTRCh2.htm)
 
-\begin{enumerate}
-následující příklady předpokládají, že text je černý a pozadí bílé barvy.
-\item celopixelové - pixely jsou buď zaplé a nebo vyplé, 1bitový princip.
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/o_1bit.png}
+  \caption{celopixelové - pixely jsou buď zaplé a nebo vyplé, 1bitový princip.}
+\end{figure}
 
-\item celopixelové s celopixelovým vyhlazováním - Celé pixely doplňují pixely ve stupních šedi, které opticky zaplňují pixelové zuby v distribuci pixelů celopixelového rastrování.
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/1bit_fullanti.png}
+  \caption{celopixelové s celopixelovým vyhlazováním - Celé pixely doplňují pixely ve stupních šedi, které opticky zaplňují pixelové zuby v distribuci pixelů celopixelového rastrování.}
+\end{figure}
 
-\item asymetrické s necelopixelovým vyhlazováním - Pixel je horizontálně složen ze 3 podpixelů, RGB - červené, zelené a modré. Tyty podpixely svití různou intenzitou dle komplexních algoritmu založených na optice a fyzice. S vzdálenostním odstupem spolu tvoří celek, kde už vnímáme jen černou a bílou. 
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/o_TT.png}
+  \caption{asymetrické s necelopixelovým vyhlazováním - Pixel je horizontálně složen ze 3 podpixelů, RGB - červené, zelené a modré. Tyty podpixely svití různou intenzitou dle komplexních algoritmu založených na optice a fyzice. S vzdálenostním odstupem spolu tvoří celek, kde už vnímáme jen černou a bílou. }
+\end{figure}
 
-\item hybridní 
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/o_TT_antialiasing.png}
+  \caption{Hybridní – V ose X se chová jako předešlý způsob. V ose Y se chová podobně jako druhý způsob rasterizace akorát taky pracuje se samotnými barvami pixelů}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/o_TT_antialiasing_preview.png}
+  \caption{Náhled toho jak ve skutečnosti vypadá hybridní rasterizace na RGB LCD obrazovce. RGB (red, green, blue) je pořadí barev v jednom pixelu, existují i BGR monitory.}
+\end{figure}
 
 \subsection{Historie hintingu}
-daw
+Hinting je samotným programovacím jazykem, před příchodem vizuálního programování hintingu se křivky musely programovat tak jak programování si asi běžně představujeme. S příchodem vizuálního hintování ovšem tento způsob textového programování úplně nevymizel a někteří inženýři jej stále používají. Vizuální způsob ale ulehčil ono řemeslo hlavně nám designérům, kteří nejsme zaměřeni jenom na hintování a věnujeme se i ostatním disciplínám typografie. 
 
 \subsection{Hinting dnes}
 
-Je umírajícím řemeslem, designéři o tuto kvalitu fontu nejeví zájem protože pracují na zařízení s vysokým rozlišením. Špatný hinting se ale projeví u koncového uživatele. Nutno přiznat, že hinting není tak potřeba jak dříve při užití na stolních počítačích. Dokonce i já jako středoevropan s poměrně moderním počítačem si všímám nekvalitně udělaných písem na webu, ty často velmi znepříjemňují čtení na digitálních zařízeních. Jsou profese, u kterých lidé tráví několik hodin denně u počítače, na čitelnosti jim záleží. Příkladem může být například opensourcové písmo Fira, které je velmi rozšířené mezi programátory. Uživatelé si nesprávného hintingu všímají a i když často neví, jak tento problém pojmenovat, tak ho nahlásí tvůrci písma aby jej \href{https://github.com/tonsky/FiraCode/issues?utf8=%E2%9C%93&q=hinting}{opravil}. Nesmíme si dělat iluze, že hinting nikoho nezajímá. Kde se vlastně vzala tahle nálada, když věnujeme takovou péči písmu pro tisk?
+Hinting dnes je zřejmě umírajícím řemeslem, designéři o tuto kvalitu fontu nejeví zájem zřejmě protože pracují na zařízení s vysokým rozlišením a samotné nedostatky ani nejsou schopni vidět na svém zařízení. Špatný hinting se ale projeví až u koncového uživatele. Nutno přiznat, že hinting není tak potřeba jak dříve při užití na stolních počítačích, větší část zařízení zobrazí písmo kvalitně i bez něj. Přesto i já s poměrně moderním počítačem si stále všímám špatně vyhintovaných fontů na webu, ty často velmi znepříjemňují čtení na digitálních zařízeních, mluvím to o webech jako je BBC a nebo YouTube, což rozhodně nejsou periferní záležitosti. Jsou profese, u kterých lidé tráví několik hodin denně u počítače, na čitelnosti jim záleží. Příkladem může být například opensourcové písmo Fira, které je velmi rozšířené mezi programátory. Uživatelé si nesprávného hintingu všímají a i když často neví, jak tento problém pojmenovat, tak ho nahlásí tvůrci písma aby jej opravil (github.com/tonsky/FiraCode/issues?utf8=%E2%9C%93&q=hinting). Nesmíme si dělat iluze, že hinting nikoho nezajímá, kde se vlastně vzala tahle nálada, když věnujeme takovou péči písmu pro tisk?
 
 
 \subsection{Druhy Hintingu}
@@ -98,8 +112,17 @@ je velmi silný nástroj, který umožňuje modifikace písmen u každé velikos
 Postcriptový hinting je modernější forma hintingu, je jednodušší než TrueTypový ale neumožňuje takové modifikace.
 
 \item \textbf{Autohinting}
-Je automatické vytvoření hintingového programu pro znaky písma. TrueTypový může fungovat buď na základě postscriptového hintingu a dobrého nastavení měr ve fontu samotném (bude fungovat přesněji než kdyby se algoritmus pokoušel o automatizaci hintingu bez nich). TT autohinting může narazit v případě kdy jde o nestandartní písmo, například když konce tahů nekončí přímo na dotažnicích. Autohinting taky nemůžeme aplikovat na písma, kde je důležité vědomí o souvislostech v písmu. To jsem už sám pocítil při práci na variabilním písmu, kde jsem mohl hintovat pouze v ose Y. To by ještě nebyl takový problém, všechny znaky byly ve skupinách zástupných znaků a ty musely být vyhintované úplně stejně jako děti této skupiny.
-\end{enumerate}
+Je automatické vytvoření hintingového programu pro znaky fontu. TrueTypový může fungovat buď na základě postscriptového hintingu a dobrého nastavení měr ve fontu samotném (bude fungovat přesněji než kdyby se algoritmus pokoušel o automatizaci hintingu bez nich). TT autohinting může narazit v případě kdy jde o nestandardní písmo, například když konce tahů nekončí přímo na dotažnicích. Autohinting taky nemůžeme aplikovat na písma, kde je důležité vědomí o souvislostech v písmu. To jsem už sám pocítil při práci na variabilním písmu, kde jsem mohl hintovat pouze v ose Y. To by ještě nebyl takový problém, všechny znaky byly ve skupinách zástupných znaků a ty musely být vyhintované úplně stejně jako děti této skupiny.
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/no_hinting.png}
+  \caption{ukázka textu bez aplikace žádného hintingu při 1bitovém rasterizování. Maličký rozdíl v bodech vyústí k nechtěnému zaokrouhlování. Písmena mají typicky jinačí tlouštky tahů }
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{pics/autohinting.png}
+  \caption{Autohinting si počínal o trochu lépe. Je vidět že algoritmus nemá pojem o symetrii a souvislostech v typografii. Horizontální tah u 'O' je o pixel tlustší protože kontura je taky o pár bodů tlustší, to je ale potřeba kvůli optické kompenzaci pro tištěnou typografii. Tloušťku tahu nastavujeme větší aby znaky byly opticky stejně tmavé. V tomto případu je tloušťka tahů konkrétně 42 bodů u verzálek a 40 u minusek, vzdálenost 42 bodu se při této velikosti už zaokrouhluje na 2 pixely nicméně vzdálenost 40 bodů se ještě zaokrouhluje na 1 pixel. Těžko říct, co se honilo algoritmu hlavou, když aplikoval kompenzaci u napojení oblevo tahu na dřík u písmene 'm'. Až velikosti 255 a více by měly mít takovou optickou kompenzaci, protože právě ve velikosti 255 začíná horizontální tah u verzálek mít 21 pixelů, u mínusek to může být tedy 20. Každých 21 pixelů navíc u horizontálního tahu verzálek může přidat 1 pixel navíc k rozdílu mezi tímto tahem u verzálek a minusek }
+\end{figure}
 
 \section{programy okolo hintingu}
 Hinting se může dělat přímo v písmovém editoru a nebo v externím editoru. Implementovaný editor má nevýhodu, že není tak specializovaný a silný jako ten externí. Na druhou stranu, je produkce takového písma s implementovaným hintingovým editorem jednodušší, protože jsou všechna data na jednom místě a nemůže dojít k problémům například při změně pořadí bodů v kontuře.
@@ -107,9 +130,9 @@ Hinting se může dělat přímo v písmovém editoru a nebo v externím editoru
 \subsection{VTT}
 VTT je nejsilnější a nejprofesionálnější editor na hinting, který existuje. Vyvíjí ho firma Microsoft a produkuje v něm také písma pro systém Windows.
 \begin{enumerate}
-\item Link - základní nástroj pro, kterým určujete jaký vztah jeden kotevní bod naplňuje k druhému. Může jít o jednoduchý pohyb - pohne-li se jeden, pohne se i druhý a nebo že tyto dva body budou od sebe vzdáleny stejný počet pixelů jako druhé dva body.
+\item Link - základní nástroj pro, kterým určujete jaký vztah jeden kotevní bod naplňuje k druhému. Může jít o jednoduchá pravidla - zaokrouhlí-li se jeden doleva, zaokrouhlí se i druhý doleva a nebo že tyto dva 'a' a 'b' body budou od sebe vzdáleny stejný počet pixelů jako druhé dva body 'x' a 'y'.
 
-\item Interpolate - interpoluje jeden bod na základě dalších dvou – něco jako když na pružinu umístíme bod a pak s jí natahujeme, bod bude vždy ve stejném vzdálenostním poměru ke krajům pružiny.
+\item Interpolate - interpoluje jeden bod na základě dalších dvou – něco jako když na pružinu umístíme bod a pak s ní natahujeme, bod bude vždy ve stejném vzdálenostním poměru ke krajům pružiny.
 
 \item Delta – posouvání buď globálních a nebo lokálních hodnot - nastavíme li že všechny body na x-výšce\marginpar{X-height je v češtině střední dotažnice, je výška hlavní hmoty mínuskových znaků, vede právě tam kde končí výška malého písmene 'x'} jsou označeny proměnnou, nástrojem delta můžeme určit v jakých velikostech se případně výška o bod zvedne, nejsme-li spokojeni s plynulostí gradace velikostí. Lokální deltou pak ovládáme body stejným způsobem a to od nejjemnější nuance 1/16 bodu až po 8 bodů do plusu i záporu, pokud by to mělo nějaký důvod, můžeme nastavit, že písmeno 'o' je širší nebo užší až o 8 bodů ve zvolené velikosti. 
 
@@ -133,7 +156,7 @@ Dataset je soubor dat, který je v případě BigQuery zadarmo. Může jít jak
 }od githubu, zajímalo mě hlavně v jakém poměru se používají patkové a nepatkové písma na webu a také jaká velikost písma je nejpoužívanější.
 
 \subsection{font-size}
-Obrazovky dnešních počítačů ve většině světa se zobrazováním písma nemají skoro žádný problém, nesmíme ovšem opomenout oblasti a nebo instituce, kde je velmi náročné přejít na novější systém, buď kvůli kvůli vlastním interním nástrojům, které je velmi náročné aktualizovat a nebo kvůli nedostatku financí. Velké firmy by měly mít písmo, které obstojí v jakékoliv situaci a to i na tom nejslabším zařízení nebo v aplikaci, kde se třeba dlaždičky a nebo dlažební kostky jsou samotnými pixely. Typickým příkladem může být displej pračky, displej bojleru, digitální cenovka v supermarketu, úvodní obrazovka monitoru při zapnutí a nebo při nastavování menu na obrazovce a taky každý další jednoduchý počítačový systém, který nepodporuje nejmodernější zobrazovací technologie. Nesmíme zapomenout i na stále poměrně silnou uživatelskou základnu, která pořád pracuje na Windows XP dle dát z roku 2017 by těchto uživatelů mělo být více než uživatelů Linuxu a nebo MacOs Sierra\footnote{https://www.businessinsider.com/how-many-people-use-windows-xp-chart-2017-5}. Windows Xp umožňuje dodatečnou instalaci rastrového enginu ClearType, tím ale velmi pravděpodobně dipsonuje pouze malá část těchto počítačů. Všechna tato zařízení vyžadují buď aplikace firemních písem, log a nebo piktogramů. Zde všude přijde hinting vhod. Písmo jsem navrhoval primárně pro nějakou velikost, která je lidmi nejpoužívanější, svůj požadavek jsem zadal pouze na nastavení webových stránek, hlavně protože je ustálené a programátoři velikost vybírají s vědomím, že neví na jakém zařízení se jejich web zobrazí a předpokládám že zvyky z navrhování pro jednu platformu se mohou projevit i při navrhování na druhou platformu. Jelikož jde o akademický úkol, tak ani já nevím na jakém zařízení bude moje písmo zobrazováno. O to zajímavější to je, neboť mi jde o to aby vypadalo, četlo se a fungovalo dobře na všech zařízeních a mnoha okolností. Pro mojí analýzu jsem využil služby BigQuery od Googlu, která dovoluje zkoumat velká množství dat pomocí jejich vlastních počítačů. Google nám v této službě už připravil nějaká data, takovému balíčku dat se říká dataset. Takový dataset si můžeme představit jako hrozně velkou excelovou tabulku, která je tak velká, že bychom ji na našem počítači neotevřeli, pravděpodobně by se zasekl a nedošel by ani do půlky. Jeden z datasetů jsou data GitHubu\marginpar{
+Obrazovky dnešních počítačů ve většině světa se zobrazováním písma nemají skoro žádný problém, nesmíme ovšem opomenout oblasti a nebo instituce, kde je velmi náročné přejít na novější systém, buď kvůli kvůli vlastním interním nástrojům, které je velmi náročné aktualizovat a nebo kvůli nedostatku financí. Velké firmy by měly mít písmo, které obstojí v jakékoliv situaci a to i na tom nejslabším zařízení nebo v aplikaci, kde se třeba dlaždičky a nebo dlažební kostky jsou samotnými pixely. Typickým příkladem může být displej pračky, displej bojleru, digitální cenovka v supermarketu, úvodní obrazovka monitoru při zapnutí a nebo při nastavování menu na obrazovce a taky každý další jednoduchý počítačový systém, který nepodporuje nejmodernější zobrazovací technologie. Nesmíme zapomenout i na stále poměrně silnou uživatelskou základnu, která pořád pracuje na Windows XP dle dát z roku 2017 by těchto uživatelů mělo být více než uživatelů Linuxu a nebo MacOs Sierra(businessinsider.com/how-many-people-use-windows-xp-chart-2017-5). Windows Xp umožňuje dodatečnou instalaci rastrového enginu ClearType, tím ale velmi pravděpodobně dipsonuje pouze malá část těchto počítačů. Všechna tato zařízení vyžadují buď aplikace firemních písem, log a nebo piktogramů. Zde všude přijde hinting vhod. Písmo jsem navrhoval primárně pro nějakou velikost, která je lidmi nejpoužívanější, svůj požadavek jsem zadal pouze na nastavení webových stránek, hlavně protože je ustálené a programátoři velikost vybírají s vědomím, že neví na jakém zařízení se jejich web zobrazí a předpokládám že zvyky z navrhování pro jednu platformu se mohou projevit i při navrhování na druhou platformu. Jelikož jde o akademický úkol, tak ani já nevím na jakém zařízení bude moje písmo zobrazováno. O to zajímavější to je, neboť mi jde o to aby vypadalo, četlo se a fungovalo dobře na všech zařízeních a mnoha okolností. Pro mojí analýzu jsem využil služby BigQuery od Googlu, která dovoluje zkoumat velká množství dat pomocí jejich vlastních počítačů. Google nám v této službě už připravil nějaká data, takovému balíčku dat se říká dataset. Takový dataset si můžeme představit jako hrozně velkou excelovou tabulku, která je tak velká, že bychom ji na našem počítači neotevřeli, pravděpodobně by se zasekl a nedošel by ani do půlky. Jeden z datasetů jsou data GitHubu\marginpar{
 GitHub je platforma pro vývojáře, kde si lidé mohou ukládat a sdílet právě vyvíjenou aplikaci buď mezi sebou a nebo veřejnosti.
 } má 2,3TB \marginpar{TB jako Terabyte, GB jako Gigabyte jsou jednotky pro popis velikosti digitálních dat}, já jsem svůj pokus dělal pouze na neplacené části 30GB a i tak jsem dostal uspokojující množství dat, kterou jsou svojí kvantitou dostačující. Z analýzy vyplynulo, že programátoři využívají z velké části jednotky PX oproti PT. Plný dataset má tedy 2,3TB, to je 80krát více než dataset, který jsem použil já. Nechci přepočítávat terabyty na hodiny filmu, ale řekl bych že 2,3TB je kapacita paměti 5-7 notebooků v roce 2019.  PT jsou určené spíše pro tištěné výstupy, programátoři jsou si tedy vědomi specifiky digitálního písma. Z dat vyplynulo, že nejpoužívanější velikostí pro weby je 14PX a 10PT což se rovná 13.3PX. Základní velikostí pro navrhování písma určeného k digitálnímu zobrazování je tedy velikost 14PX. To je velikost, kde se právě začínají lámat rozdíly mezi hintingovými unibody písmy a písma se už začínají lišit. Mřížka B/W monitoru je omezena a proto mohou působit nějaká písma dost podobně i když jde původně buď o egyptienkové písmo a knižní serif. V případě malých velikostí ovšem nemůže jít o to se odlišit ale zaručit, že písmo bude fungovat i v malých velikostech. Nemluvě o přizpůsobení piktogramů a log k takovýmto zobrazení.
 
